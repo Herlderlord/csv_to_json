@@ -9,6 +9,6 @@
 	convert.
 
 	Example :
-	```bash
+```bash
 python3 csv_to_json.py
 	```
