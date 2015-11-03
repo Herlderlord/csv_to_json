@@ -33,7 +33,7 @@ def csv_to_json(fileNameCSV):
 		# Write an entitie
 		writeFile.write("{\n");
 		for i in range(0, len(fields)):
-			writeFile.write("\t" + fields[i] + ":" + values[i]);
+			writeFile.write("\t\"" + fields[i] + "\" : \"" + values[i] + "\"");
 			if i != len(fields) -1:
 				writeFile.write(",")
 			writeFile.write("\n");
