@@ -30,21 +30,18 @@ def csv_to_json(fileNameCSV):
 	j = 0;
 
 
+	objects = [];
 	# Each Entities
 	for line in readFile:
-		if j != 0:
-			writeFile.write(",\n");
-		else:
-			j += 1;
 		values = line.split(",");
 		values[len(values)-1] = values[len(values)-1].split("\n")[0];
 		# Write an entitie
 		objectValue = objectConversion();
 		for i in range(0, len(fields)):
 			setattr(objectValue, fields[i], values[i]);
-		jsonValue = json.dumps(objectValue.__dict__, sort_keys=True, indent=4);
-		writeFile.write(jsonValue);
-
+		objects.append(objectValue.__dict__);
+	jsonValue = json.dumps(objects, sort_keys=True, indent=4);
+	writeFile.write(jsonValue);
 
 if len(sys.argv) < 2:
 	sys.exit("Pas les bons arguments.");
