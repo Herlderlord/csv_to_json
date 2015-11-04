@@ -1,6 +1,12 @@
 
 import sys;
+import json;
+from json import JSONEncoder;
 from os.path import basename;
+from pprint import pprint;
+
+class objectConversion(object):
+	pass
 
 def getFileNameAtomic(fileName):
 	splits = fileName.split(".");
@@ -22,6 +28,8 @@ def csv_to_json(fileNameCSV):
 	fields[len(fields)-1] = fields[len(fields)-1].split("\n")[0];
 
 	j = 0;
+
+
 	# Each Entities
 	for line in readFile:
 		if j != 0:
@@ -31,13 +39,11 @@ def csv_to_json(fileNameCSV):
 		values = line.split(",");
 		values[len(values)-1] = values[len(values)-1].split("\n")[0];
 		# Write an entitie
-		writeFile.write("{\n");
+		objectValue = objectConversion();
 		for i in range(0, len(fields)):
-			writeFile.write("\t\"" + fields[i] + "\" : \"" + values[i] + "\"");
-			if i != len(fields) -1:
-				writeFile.write(",")
-			writeFile.write("\n");
-		writeFile.write("}");
+			setattr(objectValue, fields[i], values[i]);
+		jsonValue = json.dumps(objectValue.__dict__, sort_keys=True, indent=4);
+		writeFile.write(jsonValue);
 
 
 if len(sys.argv) < 2:
