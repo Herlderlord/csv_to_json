@@ -1,9 +1,10 @@
-
+#!/usr/bin/python3
 import sys;
 import json;
 from json import JSONEncoder;
 from os.path import basename;
 from pprint import pprint;
+
 
 class objectConversion(object):
 	pass
